@@ -222,9 +222,15 @@
 
                     <!-- Selector Dinámico de Color -->
                     <div>
-                        <label class="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2">
-                            2. Selecciona el Color <span id="selected-color-label" class="text-red-400 normal-case font-semibold"></span> <span class="text-red-500">*</span>
-                        </label>
+                        <div class="flex items-center justify-between mb-2">
+                            <label class="block text-xs font-bold text-gray-300 uppercase tracking-wider">
+                                2. Selecciona el Color <span id="selected-color-label" class="text-red-400 normal-case font-semibold"></span> <span class="text-red-500">*</span>
+                            </label>
+                            <!-- Badge de Stock en tiempo real -->
+                            <div id="stock-display-badge" class="hidden text-[11px] font-bold px-2.5 py-0.5 rounded-md border flex items-center gap-1.5 transition-all">
+                                <!-- Contenido de stock inyectado por JS -->
+                            </div>
+                        </div>
                         <div id="color-options-container" class="flex flex-wrap gap-2">
                             <!-- Botones dinámicos de colores -->
                         </div>
@@ -241,6 +247,7 @@
                                 <span id="item-qty-display" class="px-4 text-sm font-bold text-white min-w-[40px] text-center select-none">1</span>
                                 <button type="button" onclick="updateQty(1)" class="px-4 py-2.5 text-gray-300 hover:bg-gray-800 transition-colors font-bold text-base cursor-pointer select-none">+</button>
                             </div>
+                            <span id="max-qty-notice" class="text-[11px] text-gray-400"></span>
                         </div>
                     </div>
 
@@ -436,6 +443,19 @@
         let selectedModel = "iPhone 13";
         let cart = [];
 
+        // Mapeo detallado de Stock por Modelo y Color
+        const stockData = {
+            "iPhone 13": { "negro": 5, "gris": 2, "azul": 2, "verde": 1, "café": 1, "naranja": 1, "violeta": 1, "celeste": 1 },
+            "iPhone 13 Pro Max": { "negro": 1, "gris": 1, "verde": 1 },
+            "iPhone 14": { "negro": 5, "gris": 2, "azul": 2, "verde": 1, "café": 1, "naranja": 1, "violeta": 1, "celeste": 1 },
+            "iPhone 14 Pro Max": { "negro": 1, "gris": 1, "azul": 1, "café": 1 },
+            "iPhone 15": { "negro": 3, "gris": 1, "azul": 1, "verde": 1, "café": 1, "naranja": 1 },
+            "iPhone 15 Pro": { "negro": 1, "azul": 1 },
+            "iPhone 15 Pro Max": { "negro": 3, "gris": 2, "azul": 1, "verde": 1, "café": 1, "naranja": 1, "celeste": 1 },
+            "iPhone 16": { "negro": 2 },
+            "iPhone 16 Pro Max": { "negro": 3, "gris": 2, "azul": 1, "verde": 1, "café": 1, "naranja": 1, "violeta": 1 }
+        };
+
         // Inventario exacto mapeado con las imágenes subidas a la raíz
         const inventory = {
             "iPhone 13": {
@@ -521,6 +541,9 @@
             if (selectEl) {
                 selectEl.addEventListener('change', (e) => {
                     selectedModel = e.target.value;
+                    selectedQty = 1;
+                    const display = document.getElementById('item-qty-display');
+                    if (display) display.textContent = '1';
                     renderColorOptions(selectedModel);
                     updateProductDisplay();
                 });
@@ -528,6 +551,10 @@
             renderColorOptions(selectedModel);
             updateProductDisplay();
         });
+
+        function getAvailableStock(model, color) {
+            return stockData[model]?.[color] || 0;
+        }
 
         function renderColorOptions(model) {
             const container = document.getElementById('color-options-container');
@@ -542,6 +569,7 @@
             container.innerHTML = availableColors.map(colorKey => {
                 const conf = COLOR_MAP[colorKey] || { bg: 'bg-gray-700', border: 'border-gray-500', text: colorKey };
                 const isSelected = colorKey === selectedColor;
+
                 return `
                     <button type="button" 
                             onclick="selectColor('${colorKey}')" 
@@ -560,6 +588,10 @@
 
         function selectColor(colorKey) {
             selectedColor = colorKey;
+            selectedQty = 1;
+            const display = document.getElementById('item-qty-display');
+            if (display) display.textContent = '1';
+
             renderColorOptions(selectedModel);
             updateProductDisplay();
 
@@ -576,10 +608,33 @@
             const label = document.getElementById('selected-color-label');
             const badgeText = document.getElementById('badge-model-name');
             const mainImg = document.getElementById('main-product-img');
+            const stockBadge = document.getElementById('stock-display-badge');
+            const maxNotice = document.getElementById('max-qty-notice');
 
             const colorText = (COLOR_MAP[selectedColor] && COLOR_MAP[selectedColor].text) || selectedColor;
+            const stock = getAvailableStock(selectedModel, selectedColor);
+
             if (label) label.textContent = `(${colorText})`;
             if (badgeText) badgeText.textContent = `${selectedModel} - ${colorText}`;
+
+            // Actualizar Badge de Stock
+            if (stockBadge) {
+                stockBadge.classList.remove('hidden');
+                if (stock === 1) {
+                    stockBadge.className = "text-[11px] font-extrabold px-2.5 py-1 rounded-lg bg-red-950/90 text-red-400 border border-red-700/80 shadow-lg animate-pulse flex items-center gap-1.5";
+                    stockBadge.innerHTML = `<i class="fa-solid fa-fire text-red-500"></i> ¡Última unidad disponible!`;
+                } else if (stock > 1) {
+                    stockBadge.className = "text-[11px] font-bold px-2.5 py-1 rounded-lg bg-emerald-950/80 text-emerald-400 border border-emerald-800/60 flex items-center gap-1.5";
+                    stockBadge.innerHTML = `<i class="fa-solid fa-boxes-stacked text-emerald-500"></i> ${stock} unidades disponibles`;
+                } else {
+                    stockBadge.className = "text-[11px] font-bold px-2.5 py-1 rounded-lg bg-gray-900 text-gray-500 border border-gray-800 flex items-center gap-1.5";
+                    stockBadge.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> Sin stock disponible`;
+                }
+            }
+
+            if (maxNotice) {
+                maxNotice.textContent = `(Stock disponible: ${stock})`;
+            }
 
             const fileName = inventory[selectedModel]?.[selectedColor] || "logo.jpeg";
             if (mainImg) {
@@ -588,8 +643,14 @@
         }
 
         function updateQty(change) {
+            const maxStock = getAvailableStock(selectedModel, selectedColor);
+            
             selectedQty += change;
             if (selectedQty < 1) selectedQty = 1;
+            if (selectedQty > maxStock) {
+                selectedQty = maxStock;
+                showNotification(`Solo hay ${maxStock} unidad(es) disponible(s) de esta combinación.`, 'warning');
+            }
             
             const display = document.getElementById('item-qty-display');
             if (display) display.textContent = selectedQty;
@@ -628,10 +689,18 @@
                 return;
             }
 
+            const maxStock = getAvailableStock(selectedModel, selectedColor);
             const colorText = COLOR_MAP[selectedColor]?.text || selectedColor;
             const itemKey = `${selectedModel}-${selectedColor}`;
             const existingIndex = cart.findIndex(item => item.key === itemKey);
             
+            const currentCartQty = existingIndex > -1 ? cart[existingIndex].qty : 0;
+
+            if (currentCartQty + selectedQty > maxStock) {
+                showNotification(`No hay suficiente stock. Límite máximo: ${maxStock} unidad(es).`, 'warning');
+                return;
+            }
+
             if (existingIndex > -1) {
                 cart[existingIndex].qty += selectedQty;
             } else {
