@@ -8,7 +8,7 @@
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Font Awesome -->
+    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <!-- Google Fonts -->
@@ -45,19 +45,19 @@
 </head>
 <body class="bg-gray-950 text-gray-100 min-h-screen flex flex-col justify-between selection:bg-red-600 selection:text-white">
 
-    <!-- Contenedor de Notificaciones Toast -->
+    <!-- Toast Notifications Container -->
     <div id="toast-container" class="fixed top-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
 
-    <!-- Barra Superior de Anuncios -->
+    <!-- Announcement Bar -->
     <div class="bg-gradient-to-r from-red-950 via-red-600 to-red-950 text-white text-xs sm:text-sm py-2 px-4 text-center font-bold tracking-wider uppercase shadow-lg border-b border-red-500/30">
         ⚡ PREVENTA EXCLUSIVA: Precio especial de lanzamiento ⚡
     </div>
 
-    <!-- Header / Barra de Navegación -->
+    <!-- Navigation Header -->
     <header class="sticky top-0 z-40 bg-gray-950/90 backdrop-blur-md border-b border-gray-800/80 px-4 lg:px-8 py-3 transition-all duration-300">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
             
-            <!-- Logo de la Marca -->
+            <!-- Brand Logo -->
             <a href="#" class="flex items-center gap-3 group">
                 <div class="relative w-12 h-12 rounded-xl bg-gradient-to-br from-red-600 to-black p-[2px] spider-glow transition-transform duration-300 group-hover:scale-105 flex items-center justify-center overflow-hidden">
                     <img src="logo.jpeg" 
@@ -75,14 +75,13 @@
                 </div>
             </a>
 
-            <!-- Acciones Header (Instagram + Carrito) -->
+            <!-- Header Actions -->
             <div class="flex items-center gap-3">
                 <a href="https://www.instagram.com/spidercases_uy/" target="_blank" rel="noopener noreferrer" class="bg-gray-900 hover:bg-gradient-to-r hover:from-purple-600 hover:to-pink-600 hover:text-white text-gray-300 p-2.5 sm:px-3.5 sm:py-2.5 rounded-xl border border-gray-700/60 transition-all flex items-center gap-2 group">
                     <i class="fa-brands fa-instagram text-lg group-hover:scale-110 transition-transform"></i>
                     <span class="hidden md:inline text-xs font-bold">@spidercases_uy</span>
                 </a>
 
-                <!-- Botón del Carrito -->
                 <button onclick="toggleCart()" class="relative bg-gray-900 hover:bg-gray-800 text-white p-2.5 sm:px-4 sm:py-2.5 rounded-xl border border-gray-700/60 hover:border-red-500/50 transition-all flex items-center gap-2.5 group">
                     <div class="relative">
                         <i class="fa-solid fa-cart-shopping text-lg text-gray-300 group-hover:text-red-500 transition-colors"></i>
@@ -94,13 +93,13 @@
         </div>
     </header>
 
-    <!-- Contenido Principal -->
+    <!-- Main Content -->
     <main class="flex-grow max-w-7xl mx-auto px-4 lg:px-8 py-8 sm:py-12 w-full">
         
-        <!-- Sección Hero del Producto -->
+        <!-- Hero Product Section -->
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
             
-            <!-- Columna de Galería -->
+            <!-- Gallery Column -->
             <div class="lg:col-span-7 space-y-4" id="product-view">
                 <div class="relative rounded-2xl bg-gray-900 border border-gray-800/80 overflow-hidden spider-card-glow group">
                     <div class="absolute top-4 left-4 z-10">
@@ -109,7 +108,6 @@
                         </span>
                     </div>
                     
-                    <!-- Imagen del Producto -->
                     <div class="aspect-square w-full max-h-[550px] flex items-center justify-center bg-gradient-to-b from-gray-900 to-gray-950 p-4 relative">
                         <img id="main-product-img" 
                              src="funda iphone 13 negro.png" 
@@ -117,7 +115,6 @@
                              alt="Case Matte Acrylic MagSafe" 
                              class="w-full h-full object-contain rounded-xl transition-all duration-300 group-hover:scale-105">
                         
-                        <!-- Badge Dinámico del Modelo/Color Seleccionado -->
                         <div id="model-image-badge" class="absolute bottom-4 right-4 bg-gray-950/80 backdrop-blur-md border border-gray-700/80 text-gray-300 text-[11px] font-bold px-3 py-1.5 rounded-lg shadow-lg flex items-center gap-1.5 transition-all">
                             <i class="fa-solid fa-mobile-screen-button text-red-500"></i>
                             <span id="badge-model-name">iPhone 13 - Negro</span>
@@ -125,7 +122,7 @@
                     </div>
                 </div>
 
-                <!-- Grilla de Características Rápidas -->
+                <!-- Feature Grid -->
                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
                     <div class="bg-gray-900/60 border border-gray-800 rounded-xl p-3 text-center">
                         <i class="fa-solid fa-hand text-red-500 text-xl mb-1"></i>
@@ -150,7 +147,7 @@
                 </div>
             </div>
 
-            <!-- Columna de Detalles y Selección -->
+            <!-- Details & Selector Column -->
             <div class="lg:col-span-5 space-y-6 bg-gray-900/40 p-6 sm:p-8 rounded-2xl border border-gray-800/80">
                 
                 <div>
@@ -167,7 +164,7 @@
                     </p>
                 </div>
 
-                <!-- Caja de Precio con Precio Tachado -->
+                <!-- Price Box -->
                 <div class="bg-gray-950 p-4 sm:p-5 rounded-xl border border-red-900/30 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                     <div>
                         <div class="flex items-center gap-2 mb-1 flex-wrap">
@@ -192,9 +189,8 @@
                     </div>
                 </div>
 
-                <!-- Formulario de Selección -->
+                <!-- Form Controls -->
                 <div class="space-y-5 pt-2">
-                    <!-- Selector de Modelo -->
                     <div>
                         <label class="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2">
                             1. Selecciona tu Modelo <span class="text-red-500">*</span>
@@ -220,23 +216,16 @@
                         </select>
                     </div>
 
-                    <!-- Selector Dinámico de Color -->
                     <div>
                         <div class="flex items-center justify-between mb-2">
                             <label class="block text-xs font-bold text-gray-300 uppercase tracking-wider">
                                 2. Selecciona el Color <span id="selected-color-label" class="text-red-400 normal-case font-semibold"></span> <span class="text-red-500">*</span>
                             </label>
-                            <!-- Badge de Stock en tiempo real -->
-                            <div id="stock-display-badge" class="hidden text-[11px] font-bold px-2.5 py-0.5 rounded-md border flex items-center gap-1.5 transition-all">
-                                <!-- Contenido de stock inyectado por JS -->
-                            </div>
+                            <div id="stock-display-badge" class="hidden text-[11px] font-bold px-2.5 py-0.5 rounded-md border flex items-center gap-1.5 transition-all"></div>
                         </div>
-                        <div id="color-options-container" class="flex flex-wrap gap-2">
-                            <!-- Botones dinámicos de colores -->
-                        </div>
+                        <div id="color-options-container" class="flex flex-wrap gap-2"></div>
                     </div>
 
-                    <!-- Cantidad -->
                     <div>
                         <label class="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2">
                             3. Cantidad
@@ -251,14 +240,12 @@
                         </div>
                     </div>
 
-                    <!-- Botón Añadir al Carrito -->
                     <button type="button" onclick="addToCart()" class="w-full bg-gradient-to-r from-red-600 via-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-black py-4 px-6 rounded-xl shadow-lg spider-glow transform active:scale-[0.99] transition-all flex items-center justify-center gap-3 text-base uppercase tracking-wider mt-4 cursor-pointer">
                         <i class="fa-solid fa-cart-plus text-lg"></i>
                         <span>Añadir al Carrito</span>
                     </button>
                 </div>
 
-                <!-- Garantías -->
                 <div class="border-t border-gray-800 pt-4 grid grid-cols-2 gap-2 text-xs text-gray-400">
                     <div class="flex items-center gap-2">
                         <i class="fa-solid fa-truck-fast text-red-500"></i>
@@ -273,7 +260,7 @@
             </div>
         </div>
 
-        <!-- Sección de Especificaciones Técnicas -->
+        <!-- Specifications Section -->
         <section class="mt-16 border-t border-gray-800/80 pt-12">
             <div class="text-center max-w-2xl mx-auto mb-10">
                 <span class="text-xs font-bold text-red-500 tracking-widest uppercase">Tecnología y Estilo Frosted</span>
@@ -292,7 +279,7 @@
                     </div>
                     <h3 class="text-base font-bold text-white mb-2">Acabado Anti-Huellas</h3>
                     <p class="text-xs text-gray-400 leading-relaxed">
-                        Tratamiento esmerilado que repele la grasa de las manos y marcas de uso, manteniendo la funda impoluta.
+                        Tratamiento esmerilado que repele la grasa de las manos y marcas de uso.
                     </p>
                 </div>
 
@@ -302,7 +289,7 @@
                     </div>
                     <h3 class="text-base font-bold text-white mb-2">Bordes Antishock TPU</h3>
                     <p class="text-xs text-gray-400 leading-relaxed">
-                        Marco suave reforzado que amortigua golpes en bordes y esquinas con excelente adherencia en mano.
+                        Marco suave reforzado que amortigua golpes en bordes y esquinas.
                     </p>
                 </div>
 
@@ -312,7 +299,7 @@
                     </div>
                     <h3 class="text-base font-bold text-white mb-2">Alineación MagSafe N52</h3>
                     <p class="text-xs text-gray-400 leading-relaxed">
-                        Anillo con neodimio integrado para firmeza total con cargadores inalámbricos, soportes y tarjeteros.
+                        Anillo con neodimio integrado para firmeza total con cargadores inalámbricos.
                     </p>
                 </div>
 
@@ -322,72 +309,91 @@
                     </div>
                     <h3 class="text-base font-bold text-white mb-2">Estética Luxury Frosted</h3>
                     <p class="text-xs text-gray-400 leading-relaxed">
-                        Translucidez mate que deja entrever de forma sobria el logo del equipo por solo <strong>$600 UYU</strong>.
+                        Translucidez mate que deja entrever de forma sobria el logo del equipo.
                     </p>
                 </div>
             </div>
         </section>
 
-        <!-- Sección de Pedidos Personalizados / Solicitudes Privadas -->
-        <section class="mt-16 border-t border-gray-800/80 pt-12 max-w-3xl mx-auto">
-            <div class="bg-gray-900/60 border border-gray-800 rounded-2xl p-6 sm:p-8 spider-card-glow relative overflow-hidden">
-                <div class="flex items-center gap-3 mb-4">
-                    <div class="w-10 h-10 rounded-xl bg-red-950/80 border border-red-800/50 flex items-center justify-center text-red-500 text-lg font-bold">
-                        <i class="fa-solid fa-clipboard-question"></i>
+        <!-- Native Dark Custom Request Form (100% Private) -->
+        <section class="mt-16 border-t border-gray-800/80 pt-12 max-w-4xl mx-auto">
+            <div class="bg-gray-900/80 rounded-2xl border border-gray-800 p-6 sm:p-10 spider-card-glow">
+                
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="w-12 h-12 rounded-xl bg-red-950/80 border border-red-800/50 flex items-center justify-center text-red-500 text-xl font-bold flex-shrink-0">
+                        <i class="fa-solid fa-tag"></i>
                     </div>
                     <div>
-                        <h2 class="text-xl sm:text-2xl font-black text-white uppercase tracking-tight">¿No encuentras tu modelo o color?</h2>
-                        <p class="text-xs text-gray-400">Déjanos tu pedido de forma privada para tenerlo en cuenta en la próxima importación.</p>
+                        <h2 class="text-xl sm:text-2xl font-black text-white uppercase tracking-tight">
+                            ¿No encuentras tu modelo o color?
+                        </h2>
+                        <p class="text-xs sm:text-sm text-gray-400 mt-1">
+                            Déjanos tu pedido de forma privada para tenerlo en cuenta en la próxima importación.
+                        </p>
                     </div>
                 </div>
 
-                <form id="custom-request-form" onsubmit="handleCustomRequest(event)" class="space-y-4 pt-2">
+                <form id="custom-request-form" onsubmit="submitCustomRequest(event)" class="space-y-5">
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-1.5">
+                            <label class="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2">
                                 Nombre y Apellido <span class="text-red-500">*</span>
                             </label>
-                            <input type="text" id="req-name" required placeholder="Ej: Juan Pérez" class="w-full bg-gray-950 text-gray-100 border border-gray-700 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-red-500 transition-all">
+                            <input type="text" 
+                                   id="req-name" 
+                                   required 
+                                   placeholder="Ej: Juan Pérez" 
+                                   class="w-full bg-gray-950 text-white border border-gray-800 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 transition-all">
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-1.5">
+                            <label class="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2">
                                 Celular / WhatsApp <span class="text-red-500">*</span>
                             </label>
-                            <input type="tel" id="req-phone" required placeholder="Ej: 099 123 456" class="w-full bg-gray-950 text-gray-100 border border-gray-700 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-red-500 transition-all">
+                            <input type="text" 
+                                   id="req-phone" 
+                                   required 
+                                   placeholder="Ej: 099 123 456" 
+                                   class="w-full bg-gray-950 text-white border border-gray-800 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 transition-all">
                         </div>
                     </div>
 
                     <div>
-                        <label class="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-1.5">
+                        <label class="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2">
                             ¿Qué modelo o color te gustaría encargarnos? <span class="text-red-500">*</span>
                         </label>
-                        <textarea id="req-message" rows="3" required placeholder="Ej: Me gustaría el Case Matte para Samsung S24 Ultra en color negro o iPhone 12 Pro..." class="w-full bg-gray-950 text-gray-100 border border-gray-700 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-red-500 transition-all resize-none"></textarea>
+                        <textarea id="req-message" 
+                                  rows="3" 
+                                  required 
+                                  placeholder="Ej: Me gustaría el Case Matte para Samsung S24 Ultra en color negro o iPhone 12 Pro..." 
+                                  class="w-full bg-gray-950 text-white border border-gray-800 rounded-xl p-4 text-sm focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 transition-all resize-none"></textarea>
                     </div>
 
-                    <div class="flex items-center justify-between pt-2">
-                        <span class="text-[11px] text-gray-500 flex items-center gap-1">
-                            <i class="fa-solid fa-lock text-red-500"></i> Tu mensaje se enviará de forma 100% privada.
-                        </span>
-                        <button type="submit" class="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-bold py-3 px-6 rounded-xl text-xs uppercase tracking-wider shadow-lg flex items-center gap-2 transition-all cursor-pointer">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-2">
+                        <p class="text-xs text-gray-500 flex items-center gap-1.5">
+                            <i class="fa-solid fa-lock text-red-500"></i>
+                            Tu mensaje se enviará de forma 100% privada.
+                        </p>
+                        <button type="submit" 
+                                id="btn-submit-req"
+                                class="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-black py-3.5 px-8 rounded-xl shadow-lg spider-glow transition-all flex items-center justify-center gap-2 text-xs uppercase tracking-wider cursor-pointer">
                             <i class="fa-solid fa-paper-plane"></i>
                             <span>Enviar Solicitud Privada</span>
                         </button>
                     </div>
                 </form>
+
             </div>
         </section>
 
     </main>
 
-    <!-- Panel Desplegable del Carrito de Compras -->
+    <!-- Cart Drawer -->
     <div id="cart-drawer" class="fixed inset-0 z-50 overflow-hidden pointer-events-none transition-opacity duration-300 opacity-0">
-        <!-- Backdrop -->
         <div onclick="toggleCart()" class="absolute inset-0 bg-black/80 backdrop-blur-sm transition-opacity"></div>
 
         <div class="fixed inset-y-0 right-0 max-w-full flex pl-10">
             <div class="w-screen max-w-md bg-gray-950 border-l border-gray-800 text-gray-100 flex flex-col justify-between shadow-2xl pointer-events-auto transform translate-x-full transition-transform duration-300 ease-in-out" id="cart-drawer-panel">
                 
-                <!-- Encabezado del Carrito -->
                 <div class="p-5 border-b border-gray-800 flex items-center justify-between bg-gray-900/50">
                     <div class="flex items-center gap-2">
                         <i class="fa-solid fa-cart-shopping text-red-500"></i>
@@ -398,13 +404,9 @@
                     </button>
                 </div>
 
-                <!-- Lista de Productos en Carrito -->
-                <div id="cart-items-container" class="flex-grow p-5 overflow-y-auto space-y-4 custom-scrollbar">
-                </div>
+                <div id="cart-items-container" class="flex-grow p-5 overflow-y-auto space-y-4 custom-scrollbar"></div>
 
-                <!-- Pie del Carrito -->
                 <div class="p-5 border-t border-gray-800 bg-gray-900/80 space-y-4">
-                    
                     <div class="space-y-2 text-sm">
                         <div class="flex justify-between text-gray-400">
                             <span>Valor total pedido</span>
@@ -420,15 +422,12 @@
                         </div>
                     </div>
 
-                    <!-- Botones de Salida -->
                     <div class="space-y-2.5 pt-2">
-                        <!-- Mercado Pago -->
                         <a id="mercadopago-btn" href="https://link.mercadopago.com.uy/spidercases" target="_blank" onclick="handleMercadoPagoCheckout(event)" class="w-full bg-[#009EE3] hover:bg-[#0082be] text-white font-bold py-3.5 px-4 rounded-xl flex items-center justify-center gap-2 shadow-lg transition-all text-sm uppercase tracking-wide">
                             <i class="fa-solid fa-credit-card text-base"></i>
                             <span>Pagar con Mercado Pago</span>
                         </a>
 
-                        <!-- WhatsApp -->
                         <button onclick="checkoutWhatsApp()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition-all text-xs uppercase tracking-wide">
                             <i class="fa-brands fa-whatsapp text-lg"></i>
                             <span>Finalizar por WhatsApp</span>
@@ -484,15 +483,14 @@
         </div>
     </footer>
 
-    <!-- Lógica de Javascript -->
+    <!-- App JavaScript Logic -->
     <script>
-        const UNIT_PRICE = 600; // UYU
+        const UNIT_PRICE = 600;
         let selectedQty = 1;
         let selectedColor = "negro";
         let selectedModel = "iPhone 13";
         let cart = [];
 
-        // Mapeo detallado de Stock por Modelo y Color
         const stockData = {
             "iPhone 13": { "negro": 5, "gris": 2, "azul": 2, "verde": 1, "café": 1, "naranja": 1, "violeta": 1, "celeste": 1 },
             "iPhone 13 Pro Max": { "negro": 1, "gris": 1, "verde": 1 },
@@ -505,73 +503,16 @@
             "iPhone 16 Pro Max": { "negro": 3, "gris": 2, "azul": 1, "verde": 1, "café": 1, "naranja": 1, "violeta": 1 }
         };
 
-        // Inventario exacto mapeado con las imágenes subidas a la raíz
         const inventory = {
-            "iPhone 13": {
-                "negro": "funda iphone 13 negro.png",
-                "gris": "funda iphone 13 gris.png",
-                "azul": "funda iphone 13 azul.png",
-                "verde": "funda iphone 13 verde.png",
-                "café": "funda iphone 13 café.png",
-                "naranja": "funda iphone 13 naranja.png",
-                "violeta": "funda iphone 13 violeta.png",
-                "celeste": "funda iphone 13 celeste.png"
-            },
-            "iPhone 13 Pro Max": {
-                "negro": "funda iphone 13 pro max negro.png",
-                "gris": "funda iphone 13 pro max gris.png",
-                "verde": "funda iphone 13 pro max verde.png",
-                "azul": "funda iphone 13 pro max azul.png"
-            },
-            "iPhone 14": {
-                "negro": "funda iphone 14 negro.png",
-                "gris": "funda iphone 14 gris.png",
-                "azul": "funda iphone 14 azul.png",
-                "verde": "funda iphone 14 verde.png",
-                "café": "funda iphone 14 café.png",
-                "naranja": "funda iphone 14 naranja.png",
-                "violeta": "funda iphone 14 violeta.png",
-                "celeste": "funda iphone 14 celeste.png"
-            },
-            "iPhone 14 Pro Max": {
-                "negro": "funda iphone 14 pro max negro.png",
-                "gris": "funda iphone 14 pro max gris.png",
-                "café": "funda iphone 14 pro max café.png",
-                "azul": "funda iphone 14 pro max azul.png"
-            },
-            "iPhone 15": {
-                "negro": "funda iphone 15 negro.png",
-                "gris": "funda iphone 15 gris.png",
-                "azul": "funda iphone 15 azul.png",
-                "verde": "funda iphone 15 verde.png",
-                "café": "funda iphone 15 café.png",
-                "naranja": "funda iphone 15 naranja.png"
-            },
-            "iPhone 15 Pro": {
-                "negro": "funda iphone 15 pro negro.png",
-                "azul": "funda iphone 15 pro azul.png"
-            },
-            "iPhone 15 Pro Max": {
-                "negro": "funda iphone 15 pro max negro.png",
-                "gris": "funda iphone 15 pro max gris.png",
-                "azul": "funda iphone 15 pro max azul.png",
-                "verde": "funda iphone 15 pro max verde.png",
-                "café": "funda iphone 15 pro max café.png",
-                "naranja": "funda iphone 15 pro max naranja.png",
-                "celeste": "funda iphone 15 pro max celeste.png"
-            },
-            "iPhone 16": {
-                "negro": "funda iphone 16 negro.png"
-            },
-            "iPhone 16 Pro Max": {
-                "negro": "funda iphone 16 pro max negro.png",
-                "gris": "funda iphone 16 pro max gris.png",
-                "azul": "funda iphone 16 pro max azul.png",
-                "verde": "funda iphone 16 pro max verde.png",
-                "café": "funda iphone 16 pro max café.png",
-                "naranja": "funda iphone 16 pro max naranja.png",
-                "violeta": "funda iphone 16 pro max violeta.png"
-            }
+            "iPhone 13": { "negro": "funda iphone 13 negro.png", "gris": "funda iphone 13 gris.png", "azul": "funda iphone 13 azul.png", "verde": "funda iphone 13 verde.png", "café": "funda iphone 13 café.png", "naranja": "funda iphone 13 naranja.png", "violeta": "funda iphone 13 violeta.png", "celeste": "funda iphone 13 celeste.png" },
+            "iPhone 13 Pro Max": { "negro": "funda iphone 13 pro max negro.png", "gris": "funda iphone 13 pro max gris.png", "verde": "funda iphone 13 pro max verde.png", "azul": "funda iphone 13 pro max azul.png" },
+            "iPhone 14": { "negro": "funda iphone 14 negro.png", "gris": "funda iphone 14 gris.png", "azul": "funda iphone 14 azul.png", "verde": "funda iphone 14 verde.png", "café": "funda iphone 14 café.png", "naranja": "funda iphone 14 naranja.png", "violeta": "funda iphone 14 violeta.png", "celeste": "funda iphone 14 celeste.png" },
+            "iPhone 14 Pro Max": { "negro": "funda iphone 14 pro max negro.png", "gris": "funda iphone 14 pro max gris.png", "café": "funda iphone 14 pro max café.png", "azul": "funda iphone 14 pro max azul.png" },
+            "iPhone 15": { "negro": "funda iphone 15 negro.png", "gris": "funda iphone 15 gris.png", "azul": "funda iphone 15 azul.png", "verde": "funda iphone 15 verde.png", "café": "funda iphone 15 café.png", "naranja": "funda iphone 15 naranja.png" },
+            "iPhone 15 Pro": { "negro": "funda iphone 15 pro negro.png", "azul": "funda iphone 15 pro azul.png" },
+            "iPhone 15 Pro Max": { "negro": "funda iphone 15 pro max negro.png", "gris": "funda iphone 15 pro max gris.png", "azul": "funda iphone 15 pro max azul.png", "verde": "funda iphone 15 pro max verde.png", "café": "funda iphone 15 pro max café.png", "naranja": "funda iphone 15 pro max naranja.png", "celeste": "funda iphone 15 pro max celeste.png" },
+            "iPhone 16": { "negro": "funda iphone 16 negro.png" },
+            "iPhone 16 Pro Max": { "negro": "funda iphone 16 pro max negro.png", "gris": "funda iphone 16 pro max gris.png", "azul": "funda iphone 16 pro max azul.png", "verde": "funda iphone 16 pro max verde.png", "café": "funda iphone 16 pro max café.png", "naranja": "funda iphone 16 pro max naranja.png", "violeta": "funda iphone 16 pro max violeta.png" }
         };
 
         const COLOR_MAP = {
@@ -644,7 +585,6 @@
             renderColorOptions(selectedModel);
             updateProductDisplay();
 
-            // Desplazamiento suave al visualizador en pantallas pequeñas (móviles)
             if (window.innerWidth < 1024) {
                 const productSection = document.getElementById('product-view');
                 if (productSection) {
@@ -666,7 +606,6 @@
             if (label) label.textContent = `(${colorText})`;
             if (badgeText) badgeText.textContent = `${selectedModel} - ${colorText}`;
 
-            // Actualizar Badge de Stock
             if (stockBadge) {
                 stockBadge.classList.remove('hidden');
                 if (stock === 1) {
@@ -728,13 +667,8 @@
         }
 
         function addToCart() {
-            if (!selectedModel) {
-                showNotification('Por favor selecciona un modelo antes de continuar.', 'warning');
-                return;
-            }
-
-            if (!selectedColor) {
-                showNotification('Por favor elige un color para tu funda.', 'warning');
+            if (!selectedModel || !selectedColor) {
+                showNotification('Por favor selecciona modelo y color.', 'warning');
                 return;
             }
 
@@ -869,23 +803,46 @@
             window.open(`https://wa.me/${phone}?text=${encodeURIComponent(initialMessage)}`, '_blank');
         }
 
-        function handleCustomRequest(e) {
+        function submitCustomRequest(e) {
             e.preventDefault();
+            const btn = document.getElementById('btn-submit-req');
             const name = document.getElementById('req-name').value.trim();
-            const phoneNum = document.getElementById('req-phone').value.trim();
+            const phone = document.getElementById('req-phone').value.trim();
             const message = document.getElementById('req-message').value.trim();
 
-            if (!name || !phoneNum || !message) {
-                showNotification('Por favor completa todos los campos del formulario.', 'warning');
+            if (!name || !phone || !message) {
+                showNotification('Por favor completa todos los campos obligatorios.', 'warning');
                 return;
             }
 
-            const customText = `📥 *NUEVO PEDIDO DE MODELO FUTURO - SPIDER CASES*\n\n👤 *Cliente:* ${name}\n📱 *Contacto:* ${phoneNum}\n📝 *Pedido:* ${message}`;
-            const targetPhone = "59892223102";
+            if (btn) {
+                btn.disabled = true;
+                btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> <span>Enviando...</span>`;
+            }
 
-            window.open(`https://wa.me/${targetPhone}?text=${encodeURIComponent(customText)}`, '_blank');
-            showNotification('¡Gracias! Tu solicitud ha sido enviada de forma privada.');
-            document.getElementById('custom-request-form').reset();
+            const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSd5-r47VOz3Nyber9OA4l6RZLQX8nTKrI61p6486mv0NCVyug/formResponse";
+            const formData = new FormData();
+
+            formData.append('entry.2005620554', name);
+            formData.append('entry.1166974658', phone);
+            formData.append('entry.839337160', message);
+
+            fetch(formUrl, {
+                method: 'POST',
+                mode: 'no-cors',
+                body: formData
+            }).then(() => {
+                showNotification('¡Solicitud enviada con éxito! La tendremos en cuenta para los próximos pedidos.');
+                document.getElementById('custom-request-form').reset();
+            }).catch(() => {
+                showNotification('Solicitud registrada. ¡Gracias por escribirnos!');
+                document.getElementById('custom-request-form').reset();
+            }).finally(() => {
+                if (btn) {
+                    btn.disabled = false;
+                    btn.innerHTML = `<i class="fa-solid fa-paper-plane"></i> <span>Enviar Solicitud Privada</span>`;
+                }
+            });
         }
 
         updateCartUI();
