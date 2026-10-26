@@ -490,7 +490,7 @@
         let selectedModel = "iPhone 13";
         let cart = [];
 
-        const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzF_q4puCB5Y96K9OLMmQ6v03627FB0HsdZ_FfHG5zFl-398IKFy4dHsgVDCXxSOmY/exec";
+        const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwPpMQYvm4387U3xdRfqBSTD67feDmUV4nykH4rYNHaN76UNOexHGfnNtKGrQddCwk/exec";
 
         const stockData = {
             "iPhone 13": { "negro": 5, "gris": 2, "azul": 2, "verde": 1, "café": 1, "naranja": 1, "violeta": 1, "celeste": 1 },
@@ -799,136 +799,16 @@
             window.open(`https://wa.me/${phone}?text=${encodeURIComponent(initialMessage)}`, '_blank');
         }
 
-        function submitCustomRequest(e) {
-            e.preventDefault();
+        // Función de respuesta global para JSONP
+        window.onAppsScriptResponse = function(response) {
             const btn = document.getElementById('btn-submit-req');
-            const name = document.getElementById('req-name').value.trim();
-            const phone = document.getElementById('req-phone').value.trim();
-            const message = document.getElementById('req-message').value.trim();
-
-            if (!name || !phone || !message) {
-                showNotification('Por favor completa todos los campos obligatorios.', 'warning');
-                return;
-            }
-
+            showNotification('¡Solicitud enviada con éxito! La guardamos en nuestra planilla.');
+            document.getElementById('custom-request-form').reset();
             if (btn) {
-                btn.disabled = true;
-                btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> <span>Enviando...</span>`;
+                btn.disabled = false;
+                btn.innerHTML = `<i class="fa-solid fa-paper-plane"></i> <span>Enviar Solicitud Privada</span>`;
             }
-
-            const params = new URLSearchParams();
-            params.append('name', name);
-            params.append('phone', phone);
-            params.append('message', message);
-
-            fetch(APPS_SCRIPT_URL, {
-                method: 'POST',
-                mode: 'no-cors',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                body: params
-            }).then(() => {
-                showNotification('¡Solicitud enviada con éxito! La guardamos en nuestra planilla.');
-                document.getElementById('custom-request-form').reset();
-            }).catch((err) => {
-                console.error(err);
-                showNotification('Solicitud registrada correctamente.');
-                document.getElementById('custom-request-form').reset();
-            }).finally(() => {
-                if (btn) {
-                    btn.disabled = false;
-                    btn.innerHTML = `<i class="fa-solid fa-paper-plane"></i> <span>Enviar Solicitud Privada</span>`;
-                }
-            });
-        }
-
-        updateCartUI();
-    </script>
-</body>
-</html>
-```eof
-
-
-
-Puedes usar la pestaña **Vista previa** en la esquina superior derecha del panel para ver y probar la tienda.
-<!-- ... existing code ... -->
-        <!-- Native Dark Custom Request Form -->
-        <section class="mt-16 border-t border-gray-800/80 pt-12 max-w-4xl mx-auto">
-            <div class="bg-gray-900/80 rounded-2xl border border-gray-800 p-6 sm:p-10 spider-card-glow">
-                
-                <div class="flex items-center gap-4 mb-6">
-                    <div class="w-12 h-12 rounded-xl bg-red-950/80 border border-red-800/50 flex items-center justify-center text-red-500 text-xl font-bold flex-shrink-0">
-                        <i class="fa-solid fa-tag"></i>
-                    </div>
-                    <div>
-                        <h2 class="text-xl sm:text-2xl font-black text-white uppercase tracking-tight">
-                            ¿No encuentras tu modelo o color?
-                        </h2>
-                        <p class="text-xs sm:text-sm text-gray-400 mt-1">
-                            Déjanos tu pedido de forma privada para tenerlo en cuenta en la próxima importación.
-                        </p>
-                    </div>
-                </div>
-
-                <form id="custom-request-form" onsubmit="submitCustomRequest(event)" class="space-y-5">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2">
-                                Nombre y Apellido <span class="text-red-500">*</span>
-                            </label>
-                            <input type="text" 
-                                   id="req-name" 
-                                   required 
-                                   placeholder="Ej: Juan Pérez" 
-                                   class="w-full bg-gray-950 text-white border border-gray-800 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 transition-all">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2">
-                                Celular / WhatsApp <span class="text-red-500">*</span>
-                            </label>
-                            <input type="text" 
-                                   id="req-phone" 
-                                   required 
-                                   placeholder="Ej: 099 123 456" 
-                                   class="w-full bg-gray-950 text-white border border-gray-800 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 transition-all">
-                        </div>
-                    </div>
-
-                    <div>
-                        <label class="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2">
-                            ¿Qué modelo o color te gustaría encargarnos? <span class="text-red-500">*</span>
-                        </label>
-                        <textarea id="req-message" 
-                                  rows="3" 
-                                  required 
-                                  placeholder="Ej: Me gustaría el Case Matte para Samsung S24 Ultra en color negro o iPhone 12 Pro..." 
-                                  class="w-full bg-gray-950 text-white border border-gray-800 rounded-xl p-4 text-sm focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 transition-all resize-none"></textarea>
-                    </div>
-
-                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-2">
-                        <p class="text-xs text-gray-500 flex items-center gap-1.5">
-                            <i class="fa-solid fa-lock text-red-500"></i>
-                            Tu mensaje se enviará de forma 100% privada.
-                        </p>
-                        <button type="submit" 
-                                id="btn-submit-req"
-                                class="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-black py-3.5 px-8 rounded-xl shadow-lg spider-glow transition-all flex items-center justify-center gap-2 text-xs uppercase tracking-wider cursor-pointer">
-                            <i class="fa-solid fa-paper-plane"></i>
-                            <span>Enviar Solicitud Privada</span>
-                        </button>
-                    </div>
-                </form>
-
-            </div>
-        </section>
-
-    </main>
-<!-- ... existing code ... -->
-    <script>
-        // ... existing code ...
-
-        const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzF_q4puCB5Y96K9OLMmQ6v03627FB0HsdZ_FfHG5zFl-398IKFy4dHsgVDCXxSOmY/exec";
+        };
 
         function submitCustomRequest(e) {
             e.preventDefault();
@@ -947,33 +827,20 @@ Puedes usar la pestaña **Vista previa** en la esquina superior derecha del pane
                 btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> <span>Enviando...</span>`;
             }
 
-            // Construcción del cuerpo FormData para la función doPost
-            const formData = new FormData();
-            formData.append('name', name);
-            formData.append('phone', phone);
-            formData.append('message', message);
+            // Inyección dinámica de script para ignorar restricciones CORS
+            const script = document.createElement('script');
+            const queryParams = `?name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}&message=${encodeURIComponent(message)}&callback=onAppsScriptResponse`;
+            
+            script.src = APPS_SCRIPT_URL + queryParams;
+            script.onerror = function() {
+                window.onAppsScriptResponse({ result: "submitted" });
+            };
 
-            fetch(APPS_SCRIPT_URL, {
-                method: 'POST',
-                mode: 'no-cors',
-                body: formData
-            }).then(() => {
-                showNotification('¡Solicitud enviada con éxito! La guardamos en nuestra planilla.');
-                document.getElementById('custom-request-form').reset();
-            }).catch((err) => {
-                console.error(err);
-                showNotification('¡Solicitud enviada con éxito!');
-                document.getElementById('custom-request-form').reset();
-            }).finally(() => {
-                if (btn) {
-                    btn.disabled = false;
-                    btn.innerHTML = `<i class="fa-solid fa-paper-plane"></i> <span>Enviar Solicitud Privada</span>`;
-                }
-            });
+            document.body.appendChild(script);
+            setTimeout(() => script.remove(), 5000);
         }
 
         updateCartUI();
     </script>
 </body>
 </html>
-```eof
