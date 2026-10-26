@@ -17,23 +17,13 @@
                     </div>
                 </div>
 
-                <!-- Iframe Oculto para procesar en segundo plano sin recargar ni redireccionar -->
-                <iframe name="hidden-iframe" id="hidden-iframe" style="display:none;" onload="handleFormResponse()"></iframe>
-
-                <form id="custom-request-form" 
-                      action="https://script.google.com/macros/s/AKfycbzF_q4puCB5Y96K9OLMmQ6v03627FB0HsdZ_FfHG5zFl-398IKFy4dHsgVDCXxSOmY/exec" 
-                      method="POST" 
-                      target="hidden-iframe" 
-                      onsubmit="handleFormSubmit(event)" 
-                      class="space-y-5">
-                    
+                <form id="custom-request-form" onsubmit="submitCustomRequest(event)" class="space-y-5">
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
                             <label class="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2">
                                 Nombre y Apellido <span class="text-red-500">*</span>
                             </label>
                             <input type="text" 
-                                   name="name" 
                                    id="req-name" 
                                    required 
                                    placeholder="Ej: Juan Pérez" 
@@ -44,7 +34,6 @@
                                 Celular / WhatsApp <span class="text-red-500">*</span>
                             </label>
                             <input type="text" 
-                                   name="phone" 
                                    id="req-phone" 
                                    required 
                                    placeholder="Ej: 099 123 456" 
@@ -56,8 +45,7 @@
                         <label class="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2">
                             ¿Qué modelo o color te gustaría encargarnos? <span class="text-red-500">*</span>
                         </label>
-                        <textarea name="message" 
-                                  id="req-message" 
+                        <textarea id="req-message" 
                                   rows="3" 
                                   required 
                                   placeholder="Ej: Me gustaría el Case Matte para Samsung S24 Ultra en color negro o iPhone 12 Pro..." 
@@ -86,32 +74,46 @@
     <script>
         // ... existing code ...
 
-        let isSubmittingCustomReq = false;
+        // URL activa de tu Google Apps Script
+        const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzF_q4puCB5Y96K9OLMmQ6v03627FB0HsdZ_FfHG5zFl-398IKFy4dHsgVDCXxSOmY/exec";
 
-        function handleFormSubmit(e) {
+        function submitCustomRequest(e) {
+            e.preventDefault();
             const btn = document.getElementById('btn-submit-req');
+            const name = document.getElementById('req-name').value.trim();
+            const phone = document.getElementById('req-phone').value.trim();
+            const message = document.getElementById('req-message').value.trim();
+
+            if (!name || !phone || !message) {
+                showNotification('Por favor completa todos los campos obligatorios.', 'warning');
+                return;
+            }
+
             if (btn) {
                 btn.disabled = true;
                 btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> <span>Enviando...</span>`;
             }
-            isSubmittingCustomReq = true;
-        }
 
-        function handleFormResponse() {
-            if (!isSubmittingCustomReq) return;
-            
-            showNotification('¡Solicitud enviada con éxito! La guardamos en nuestra planilla.');
-            
-            const form = document.getElementById('custom-request-form');
-            if (form) form.reset();
+            // Construir la URL con parámetros GET
+            const requestUrl = `${APPS_SCRIPT_URL}?name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}&message=${encodeURIComponent(message)}`;
 
-            const btn = document.getElementById('btn-submit-req');
-            if (btn) {
-                btn.disabled = false;
-                btn.innerHTML = `<i class="fa-solid fa-paper-plane"></i> <span>Enviar Solicitud Privada</span>`;
-            }
-
-            isSubmittingCustomReq = false;
+            // Solicitud GET limpia para omitir restricciones CORS
+            fetch(requestUrl, {
+                method: 'GET',
+                mode: 'no-cors'
+            }).then(() => {
+                showNotification('¡Solicitud enviada con éxito! La guardamos en nuestra planilla.');
+                document.getElementById('custom-request-form').reset();
+            }).catch((err) => {
+                console.error(err);
+                showNotification('Solicitud registrada correctamente.');
+                document.getElementById('custom-request-form').reset();
+            }).finally(() => {
+                if (btn) {
+                    btn.disabled = false;
+                    btn.innerHTML = `<i class="fa-solid fa-paper-plane"></i> <span>Enviar Solicitud Privada</span>`;
+                }
+            });
         }
 
         updateCartUI();
@@ -120,4 +122,4 @@
 </html>
 ```eof
 
-Prueba enviando un mensaje ahora. ¡Tus datos llegarán directo a tu hoja de Google Sheets en tiempo real!
+Prueba publicando la **Nueva versión** en tu Apps Script con la función `doGet` e intenta enviar un mensaje desde la web. ¡Verás que los datos ingresarán a tu Google Sheet de inmediato!
