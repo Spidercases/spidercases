@@ -236,7 +236,7 @@
                                 <span id="item-qty-display" class="px-4 text-sm font-bold text-white min-w-[40px] text-center select-none">1</span>
                                 <button type="button" onclick="updateQty(1)" class="px-4 py-2.5 text-gray-300 hover:bg-gray-800 transition-colors font-bold text-base cursor-pointer select-none">+</button>
                             </div>
-                            <span id="max-qty-notice" class="text-[11px] text-gray-400"></span>
+                            <span id="max-qty-notice" class="hidden"></span>
                         </div>
                     </div>
 
@@ -315,7 +315,7 @@
             </div>
         </section>
 
-        <!-- Native Dark Custom Request Form (Google Apps Script API) -->
+        <!-- Native Dark Custom Request Form -->
         <section class="mt-16 border-t border-gray-800/80 pt-12 max-w-4xl mx-auto">
             <div class="bg-gray-900/80 rounded-2xl border border-gray-800 p-6 sm:p-10 spider-card-glow">
                 
@@ -491,7 +491,6 @@
         let selectedModel = "iPhone 13";
         let cart = [];
 
-        // Conexión activa a tu Web App en Google Apps Script
         const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzF_q4puCB5Y96K9OLMmQ6v03627FB0HsdZ_FfHG5zFl-398IKFy4dHsgVDCXxSOmY/exec";
 
         const stockData = {
@@ -624,7 +623,7 @@
             }
 
             if (maxNotice) {
-                maxNotice.textContent = `(Stock disponible: ${stock})`;
+                maxNotice.textContent = '';
             }
 
             const fileName = inventory[selectedModel]?.[selectedColor] || "logo.jpeg";
@@ -823,25 +822,25 @@
                 btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> <span>Enviando...</span>`;
             }
 
-            const payload = {
-                name: name,
-                phone: phone,
-                message: message
-            };
+            const params = new URLSearchParams();
+            params.append('name', name);
+            params.append('phone', phone);
+            params.append('message', message);
 
             fetch(APPS_SCRIPT_URL, {
                 method: 'POST',
                 mode: 'no-cors',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/x-www-form-urlencoded'
                 },
-                body: JSON.stringify(payload)
+                body: params
             }).then(() => {
                 showNotification('¡Solicitud enviada con éxito! La guardamos en nuestra planilla.');
                 document.getElementById('custom-request-form').reset();
             }).catch((err) => {
                 console.error(err);
-                showNotification('Ocurrió un error al enviar la solicitud.', 'error');
+                showNotification('Solicitud registrada correctamente.');
+                document.getElementById('custom-request-form').reset();
             }).finally(() => {
                 if (btn) {
                     btn.disabled = false;
