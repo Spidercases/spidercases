@@ -315,7 +315,7 @@
             </div>
         </section>
 
-        <!-- Native Dark Custom Request Form (100% Private) -->
+        <!-- Native Dark Custom Request Form (Google Apps Script API) -->
         <section class="mt-16 border-t border-gray-800/80 pt-12 max-w-4xl mx-auto">
             <div class="bg-gray-900/80 rounded-2xl border border-gray-800 p-6 sm:p-10 spider-card-glow">
                 
@@ -490,6 +490,9 @@
         let selectedColor = "negro";
         let selectedModel = "iPhone 13";
         let cart = [];
+
+        // Conexión activa a tu Web App en Google Apps Script
+        const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzF_q4puCB5Y96K9OLMmQ6v03627FB0HsdZ_FfHG5zFl-398IKFy4dHsgVDCXxSOmY/exec";
 
         const stockData = {
             "iPhone 13": { "negro": 5, "gris": 2, "azul": 2, "verde": 1, "café": 1, "naranja": 1, "violeta": 1, "celeste": 1 },
@@ -820,23 +823,25 @@
                 btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> <span>Enviando...</span>`;
             }
 
-            const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSd5-r47VOz3Nyber9OA4l6RZLQX8nTKrI61p6486mv0NCVyug/formResponse";
-            const formData = new FormData();
+            const payload = {
+                name: name,
+                phone: phone,
+                message: message
+            };
 
-            formData.append('entry.2005620554', name);
-            formData.append('entry.1166974658', phone);
-            formData.append('entry.839337160', message);
-
-            fetch(formUrl, {
+            fetch(APPS_SCRIPT_URL, {
                 method: 'POST',
                 mode: 'no-cors',
-                body: formData
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
             }).then(() => {
-                showNotification('¡Solicitud enviada con éxito! La tendremos en cuenta para los próximos pedidos.');
+                showNotification('¡Solicitud enviada con éxito! La guardamos en nuestra planilla.');
                 document.getElementById('custom-request-form').reset();
-            }).catch(() => {
-                showNotification('Solicitud registrada. ¡Gracias por escribirnos!');
-                document.getElementById('custom-request-form').reset();
+            }).catch((err) => {
+                console.error(err);
+                showNotification('Ocurrió un error al enviar la solicitud.', 'error');
             }).finally(() => {
                 if (btn) {
                     btn.disabled = false;
